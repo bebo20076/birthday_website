@@ -1,0 +1,439 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Beautiful</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  background: linear-gradient(135deg, #fff1f7, #f4e8ff, #fff7df);
+  color: #5b3b54;
+  overflow-x: hidden;
+}
+
+.slideshow {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.slide {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  scroll-snap-align: start;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85), transparent 25%),
+    radial-gradient(circle at 80% 10%, rgba(255, 210, 235, 0.55), transparent 25%),
+    radial-gradient(circle at 15% 80%, rgba(228, 205, 255, 0.55), transparent 30%),
+    radial-gradient(circle at 85% 85%, rgba(255, 232, 178, 0.6), transparent 28%);
+  z-index: -3;
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  filter: blur(8px);
+  animation: softGlow 8s ease-in-out infinite alternate;
+  z-index: -2;
+}
+
+.content {
+  max-width: 900px;
+  padding: 52px 42px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.38);
+  backdrop-filter: blur(18px);
+  border-radius: 34px;
+  box-shadow: 0 30px 90px rgba(145, 83, 127, 0.18);
+  animation: cardEntrance 1.3s ease both;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  color: #b35f91;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  animation: shimmer 3s linear infinite;
+}
+
+h1, h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #7c416f;
+  text-shadow: 0 8px 30px rgba(255, 255, 255, 0.9);
+}
+
+h1 {
+  font-size: clamp(3.3rem, 10vw, 8.5rem);
+  animation: elegantZoom 4.5s ease-in-out infinite alternate;
+}
+
+h2 {
+  font-size: clamp(2.25rem, 7vw, 5.6rem);
+  animation: gentleFloat 4.5s ease-in-out infinite;
+}
+
+p {
+  margin-top: 24px;
+  font-size: clamp(1rem, 2.3vw, 1.45rem);
+  color: #78536f;
+  line-height: 1.8;
+}
+
+.gold {
+  color: #b88746;
+}
+
+.big-quote {
+  font-size: clamp(2.5rem, 8vw, 6.2rem);
+}
+
+.nav-dots {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 20;
+}
+
+.nav-dots a {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(124, 65, 111, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: 0.3s ease;
+}
+
+.nav-dots a:hover {
+  background: #b35f91;
+  transform: scale(1.45);
+}
+
+.scroll-hint {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-size: 0.85rem;
+  color: rgba(91, 59, 84, 0.68);
+  letter-spacing: 0.08em;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+.sparkle,
+.heart,
+.flower,
+.butterfly,
+.star {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.78;
+  z-index: -1;
+  filter: drop-shadow(0 10px 18px rgba(145, 83, 127, 0.15));
+}
+
+.sparkle {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 18px 8px rgba(255, 255, 255, 0.75);
+  animation: twinkle 2.6s ease-in-out infinite;
+}
+
+.heart,
+.flower,
+.butterfly,
+.star {
+  font-size: clamp(1.4rem, 3vw, 2.6rem);
+  animation: floatUp 7s ease-in-out infinite;
+}
+
+.heart { color: #ee8fba; }
+.flower { color: #d997bd; }
+.butterfly { color: #b799ff; }
+.star { color: #d9a94e; }
+
+.s1 { top: 12%; left: 12%; animation-delay: 0s; }
+.s2 { top: 18%; right: 16%; animation-delay: 0.8s; }
+.s3 { bottom: 16%; left: 18%; animation-delay: 1.5s; }
+.s4 { bottom: 20%; right: 12%; animation-delay: 2.1s; }
+.s5 { top: 48%; left: 6%; animation-delay: 1.1s; }
+.s6 { top: 56%; right: 7%; animation-delay: 2.7s; }
+
+.music-note {
+  position: absolute;
+  top: 12%;
+  right: 10%;
+  font-size: 2.2rem;
+  opacity: 0.55;
+  animation: musicDrift 4s ease-in-out infinite;
+}
+
+.ribbon {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border: 2px solid rgba(184, 135, 70, 0.25);
+  border-radius: 45% 55% 60% 40%;
+  animation: rotateRibbon 12s linear infinite;
+  z-index: -2;
+}
+
+.ribbon.one { top: 10%; left: 8%; }
+.ribbon.two { bottom: 8%; right: 8%; width: 220px; height: 220px; animation-direction: reverse; }
+
+.slide:nth-child(1) {
+  background: linear-gradient(135deg, #ffeaf4, #f3e7ff, #fff3d6);
+}
+
+.slide:nth-child(2) {
+  background: linear-gradient(135deg, #fff5fb, #ffe6f2, #eee5ff);
+}
+
+.slide:nth-child(3) {
+  background: linear-gradient(135deg, #ffeaf5, #fff8e8, #f2e9ff);
+}
+
+.slide:nth-child(4) {
+  background: linear-gradient(135deg, #f7e7ff, #fff0f8, #fff8df);
+}
+
+.slide:nth-child(5) {
+  background: linear-gradient(135deg, #fffaf0, #ffeaf4, #eee7ff);
+}
+
+.slide:nth-child(6) {
+  background: linear-gradient(135deg, #fff2dc, #ffe7f4, #f5e9ff);
+}
+
+.slide:nth-child(7) {
+  background: linear-gradient(135deg, #efe8ff, #fff1f8, #fff8e9);
+}
+
+.slide:nth-child(8) {
+  background: linear-gradient(135deg, #fff4e3, #ffeaf5, #efe7ff);
+}
+
+.slide:nth-child(9) {
+  background: linear-gradient(135deg, #ffe2f0, #f1ddff, #fff0c6);
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes elegantZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.045); }
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-28px) rotate(9deg); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.55); }
+}
+
+@keyframes softGlow {
+  from { transform: translate(-80px, -40px) scale(0.9); }
+  to { transform: translate(80px, 40px) scale(1.12); }
+}
+
+@keyframes shimmer {
+  0% { box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+  50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.85); }
+  100% { box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+@keyframes musicDrift {
+  0%, 100% { transform: translateY(0) rotate(-8deg); }
+  50% { transform: translateY(-24px) rotate(8deg); }
+}
+
+@keyframes rotateRibbon {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+
+@media (max-width: 650px) {
+  .content {
+    padding: 38px 24px;
+    border-radius: 26px;
+  }
+
+  .nav-dots {
+    right: 12px;
+  }
+
+  .scroll-hint {
+    font-size: 0.72rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="nav-dots" aria-label="Slide navigation">
+    <a href="#slide1"></a>
+    <a href="#slide2"></a>
+    <a href="#slide3"></a>
+    <a href="#slide4"></a>
+    <a href="#slide5"></a>
+    <a href="#slide6"></a>
+    <a href="#slide7"></a>
+    <a href="#slide8"></a>
+    <a href="#slide9"></a>
+  </div>  <div class="scroll-hint">Scroll for the magic ↓</div>  <main class="slideshow">
+    <section class="slide" id="slide1">
+      <span class="music-note">♪</span>
+      <span class="sparkle s1"></span><span class="sparkle s2"></span><span class="sparkle s3"></span>
+      <span class="heart s4">♡</span><span class="star s5">✦</span><span class="star s6">✧</span>
+      <div class="ribbon one"></div><div class="ribbon two"></div>
+      <div class="content">
+        <span class="eyebrow">A special day</span>
+        <h1>Happy Birthday</h1>
+        <p>Soft sparkles, gentle motion, and a dreamy birthday vibe made just for you.</p>
+      </div>
+    </section><section class="slide" id="slide2">
+  <span class="flower s1">✿</span><span class="flower s2">❀</span><span class="sparkle s3"></span>
+  <span class="heart s4">♡</span><span class="sparkle s5"></span><span class="flower s6">✾</span>
+  <div class="content">
+    <span class="eyebrow">For you</span>
+    <h2>To the most beautiful girl</h2>
+    <p>May this moment glow as beautifully as your heart.</p>
+  </div>
+</section>
+
+<section class="slide" id="slide3">
+  <span class="heart s1">♡</span><span class="heart s2">♥</span><span class="heart s3">♡</span>
+  <span class="sparkle s4"></span><span class="sparkle s5"></span><span class="heart s6">♡</span>
+  <div class="content">
+    <span class="eyebrow">Celebrate</span>
+    <h2>Today is all about you</h2>
+    <p>A day full of smiles, sweetness, love, and little magical moments.</p>
+  </div>
+</section>
+
+<section class="slide" id="slide4">
+  <span class="sparkle s1"></span><span class="sparkle s2"></span><span class="star s3">✦</span>
+  <span class="heart s4">♡</span><span class="star s5">✧</span><span class="sparkle s6"></span>
+  <div class="content">
+    <span class="eyebrow">Remember this</span>
+    <h2 class="big-quote">You are more beautiful than you think.</h2>
+    <p>Never forget how special, strong, and lovely you truly are.</p>
+  </div>
+</section>
+
+<section class="slide" id="slide5">
+  <span class="sparkle s1"></span><span class="star s2">✦</span><span class="sparkle s3"></span>
+  <span class="butterfly s4">🦋</span><span class="sparkle s5"></span><span class="star s6">✧</span>
+  <div class="content">
+    <span class="eyebrow">Always</span>
+    <h2>Believe in yourself, always.</h2>
+    <p>You carry more light, power, and beauty than you realize.</p>
+  </div>
+</section>
+
+<section class="slide" id="slide6">
+  <span class="heart s1">♡</span><span class="sparkle s2"></span><span class="flower s3">✿</span>
+  <span class="star s4">✦</span><span class="sparkle s5"></span><span class="heart s6">♥</span>
+  <div class="content">
+    <span class="eyebrow">Your smile</span>
+    <h2>Your smile makes the world brighter.</h2>
+    <p>Like warm sunlight, soft and unforgettable.</p>
+  </div>
+</section>
+
+<section class="slide" id="slide7">
+  <span class="butterfly s1">🦋</span><span class="star s2">✧</span><span class="sparkle s3"></span>
+  <span class="star s4">✦</span><span class="butterfly s5">🦋</span><span class="sparkle s6"></span>
+  <div class="content">
+    <span class="eyebrow">Dreamy heart</span>
+    <h2>Keep shining, keep dreaming, keep being you.</h2>
+    <p>The world is softer and prettier with you in it.</p>
+  </div>
+</section>
+
+<section class="slide" id="slide8">
+  <span class="flower s1">❀</span><span class="sparkle s2"></span><span class="heart s3">♡</span>
+  <span class="flower s4">✿</span><span class="star s5">✦</span><span class="sparkle s6"></span>
+  <div class="content">
+    <span class="eyebrow">Birthday wish</span>
+    <h2>May your year be full of love, happiness, and beautiful moments.</h2>
+    <p>May every new chapter bring you closer to everything your heart deserves.</p>
+  </div>
+</section>
+
+<section class="slide" id="slide9">
+  <span class="sparkle s1"></span><span class="heart s2">♡</span><span class="star s3">✦</span>
+  <span class="flower s4">✿</span><span class="sparkle s5"></span><span class="heart s6">♥</span>
+  <div class="ribbon one"></div><div class="ribbon two"></div>
+  <div class="content">
+    <span class="eyebrow">Final wish</span>
+    <h1>Happy Birthday, <span class="gold">Beautiful</span></h1>
+    <p>Wishing you a magical day and a year that feels like a dream come true.</p>
+  </div>
+</section>
+
+  </main>
+</body>
+</html>
